@@ -49,12 +49,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PDFUtilities-Legacy\PDFUtilities.csproj">
-      <Project>{aab153b6-5a92-4092-86b4-1faf3789831e}</Project>
-      <Name>PDFUtilities</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
