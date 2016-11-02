@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace PDFUtilities_Legacy
 {
-    public class Class1
+    public class PdfGenerator
     {
+        public static void GenerateInvoice(InvoiceEntity entity) {
+
+        }
+
+
     }
 }

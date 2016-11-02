@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PDFUtilities_Legacy;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,9 @@ namespace TestPDFUtilities
     {
         static void Main(string[] args)
         {
+
+            InvoiceEntity entity = new InvoiceEntity();
+            PdfGenerator.GenerateInvoice(entity);
         }
     }
 }
