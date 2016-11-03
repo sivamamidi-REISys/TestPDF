@@ -56,6 +56,72 @@ namespace PDFUtilities_Legacy
             paragraph5.Alignment = Element.ALIGN_RIGHT;
             document.Add(paragraph5);
 
+            PdfPTable table = new PdfPTable(5);
+            table.SpacingAfter = 5;
+            table.SpacingBefore = 5;
+            table.TotalWidth = PageSize.A4.Width;
+            table.LockedWidth = true;
+
+            PdfPCell cellid = new PdfPCell(new Phrase("#"));
+            cellid.HorizontalAlignment = Element.ALIGN_CENTER;
+            cellid.BackgroundColor = BaseColor.WHITE;
+            cellid.BorderWidth = 1;
+            cellid.BorderColor = BaseColor.BLACK;
+            cellid.Padding = 3;
+
+            PdfPCell cellname = new PdfPCell(new Phrase("Item & Description"));
+            cellname.HorizontalAlignment = Element.ALIGN_RIGHT;
+            cellname.BackgroundColor = BaseColor.WHITE;
+            cellname.BorderWidth = 1;
+            cellname.BorderColor = BaseColor.BLACK;
+            cellname.Padding = 3;
+
+
+            PdfPCell qty = new PdfPCell(new Phrase("    Quantity"));
+            cellname.HorizontalAlignment = Element.ALIGN_CENTER;
+            cellname.BackgroundColor = BaseColor.WHITE;
+            cellname.BorderWidth = 1;
+            cellname.BorderColor = BaseColor.BLACK;
+            cellname.Padding = 3;
+
+            PdfPCell rate = new PdfPCell(new Phrase("    Rate"));
+            cellname.HorizontalAlignment = Element.ALIGN_CENTER;
+            cellname.BackgroundColor = BaseColor.WHITE;
+            cellname.BorderWidth = 1;
+            cellname.BorderColor = BaseColor.BLACK;
+            cellname.Padding = 3;
+
+            PdfPCell amount = new PdfPCell(new Phrase("    Amount"));
+            cellname.HorizontalAlignment = Element.ALIGN_CENTER;
+            cellname.BackgroundColor = BaseColor.WHITE;
+            cellname.BorderWidth = 1;
+            cellname.BorderColor = BaseColor.BLACK;
+            cellname.Padding = 3;
+
+
+            //add cells to the tables
+            table.AddCell(cellid);
+            table.AddCell(cellname);
+            table.AddCell(qty);
+            table.AddCell(rate);
+            table.AddCell(amount);
+
+            PdfPTable table2 = new PdfPTable(5);
+
+            PdfPCell id = new PdfPCell();
+            cellname.HorizontalAlignment = Element.ALIGN_CENTER;
+            cellname.BackgroundColor = BaseColor.WHITE;
+            cellname.BorderWidth = 1;
+            cellname.BorderColor = BaseColor.BLACK;
+            cellname.Padding = 3;
+
+
+
+            document.Add(table);
+
+
+
+
             document.Close();
             System.Diagnostics.Process.Start("Invioce.pdf");
         }
