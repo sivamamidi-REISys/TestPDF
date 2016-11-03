@@ -27,12 +27,7 @@ namespace PDFUtilities_Legacy
         public string Notes { get; set; }
 
 
-
-
-
-
-
-    }
+}
 
     public class Customer
     {
