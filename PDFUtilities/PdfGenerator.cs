@@ -20,14 +20,14 @@ namespace PDFUtilities_Legacy
             document.Open();
             string text = @"INVOICE";
             Paragraph paragraph = new Paragraph();
-           // paragraph.SpacingBefore = 600;
-           // paragraph.SpacingAfter = 10;
+            // paragraph.SpacingBefore = 600;
+            // paragraph.SpacingAfter = 10;
             paragraph.Alignment = Element.ALIGN_RIGHT;
             paragraph.Font = FontFactory.GetFont(FontFactory.HELVETICA, 12f, BaseColor.BLACK);
             paragraph.Add(text);
             document.Add(paragraph);
 
-            Paragraph paragraph1 = new Paragraph("INV-"+entity.InvoiceNumber);
+            Paragraph paragraph1 = new Paragraph("INV-" + entity.InvoiceNumber);
             paragraph1.Alignment = Element.ALIGN_RIGHT;
             document.Add(paragraph1);
 
@@ -35,12 +35,11 @@ namespace PDFUtilities_Legacy
             paragraph2.Alignment = Element.ALIGN_RIGHT;
             document.Add(paragraph2);
 
-            Paragraph paragraph3 = new Paragraph("RS."+entity.BalanceDue);
+            Paragraph paragraph3 = new Paragraph("RS." + entity.BalanceDue);
             paragraph3.Alignment = Element.ALIGN_RIGHT;
             document.Add(paragraph3);
 
-
-            Paragraph paragraph4 = new Paragraph("Invoice Date:"+entity.InvoiceDate);
+            Paragraph paragraph4 = new Paragraph("Invoice Date:" + entity.InvoiceDate);
             paragraph4.Alignment = Element.ALIGN_RIGHT;
             document.Add(paragraph4);
 
@@ -52,7 +51,7 @@ namespace PDFUtilities_Legacy
             paragraph7.Alignment = Element.ALIGN_LEFT;
             document.Add(paragraph7);
 
-            Paragraph paragraph5 = new Paragraph("DueDate"+entity.DueDate);
+            Paragraph paragraph5 = new Paragraph("DueDate" + entity.DueDate);
             paragraph5.Alignment = Element.ALIGN_RIGHT;
             document.Add(paragraph5);
 
@@ -65,62 +64,122 @@ namespace PDFUtilities_Legacy
             PdfPCell cellid = new PdfPCell(new Phrase("#"));
             cellid.HorizontalAlignment = Element.ALIGN_CENTER;
             cellid.BackgroundColor = BaseColor.WHITE;
-            cellid.BorderWidth = 1;
-            cellid.BorderColor = BaseColor.BLACK;
+           // cellid.BorderWidth = 1;
+            cellid.BorderColor = BaseColor.LIGHT_GRAY;
+            //cellid.BackgroundColor = BaseColor.BLACK;
+            //cellid.F
             cellid.Padding = 3;
 
             PdfPCell cellname = new PdfPCell(new Phrase("Item & Description"));
-            cellname.HorizontalAlignment = Element.ALIGN_RIGHT;
-            cellname.BackgroundColor = BaseColor.WHITE;
-            cellname.BorderWidth = 1;
-            cellname.BorderColor = BaseColor.BLACK;
-            cellname.Padding = 3;
-
-
-            PdfPCell qty = new PdfPCell(new Phrase("    Quantity"));
             cellname.HorizontalAlignment = Element.ALIGN_CENTER;
             cellname.BackgroundColor = BaseColor.WHITE;
-            cellname.BorderWidth = 1;
-            cellname.BorderColor = BaseColor.BLACK;
+           // cellname.BorderWidth = 1;
+            cellname.BorderColor = BaseColor.LIGHT_GRAY;
             cellname.Padding = 3;
 
-            PdfPCell rate = new PdfPCell(new Phrase("    Rate"));
-            cellname.HorizontalAlignment = Element.ALIGN_CENTER;
-            cellname.BackgroundColor = BaseColor.WHITE;
-            cellname.BorderWidth = 1;
-            cellname.BorderColor = BaseColor.BLACK;
-            cellname.Padding = 3;
+            PdfPCell qty = new PdfPCell(new Phrase("Quantity"));
+            qty.HorizontalAlignment = Element.ALIGN_CENTER;
+            qty.BackgroundColor = BaseColor.WHITE;
+           // qty.BorderWidth = 1;
+            qty.BorderColor = BaseColor.LIGHT_GRAY;
+            qty.Padding = 3;
 
-            PdfPCell amount = new PdfPCell(new Phrase("    Amount"));
-            cellname.HorizontalAlignment = Element.ALIGN_CENTER;
-            cellname.BackgroundColor = BaseColor.WHITE;
-            cellname.BorderWidth = 1;
-            cellname.BorderColor = BaseColor.BLACK;
-            cellname.Padding = 3;
+            PdfPCell rate = new PdfPCell(new Phrase("Rate"));
+            rate.HorizontalAlignment = Element.ALIGN_CENTER;
+            rate.BackgroundColor = BaseColor.WHITE;
+           // rate.BorderWidth = 1;
+            rate.BorderColor = BaseColor.LIGHT_GRAY;
+            rate.Padding = 3;
 
+            PdfPCell amt = new PdfPCell(new Phrase("Amount"));
+            amt.HorizontalAlignment = Element.ALIGN_CENTER;
+            amt.BackgroundColor = BaseColor.WHITE;
+           // amt.BorderWidth = 1;
+            amt.BorderColor = BaseColor.LIGHT_GRAY;
+            amt.Padding = 3;
 
             //add cells to the tables
             table.AddCell(cellid);
             table.AddCell(cellname);
             table.AddCell(qty);
             table.AddCell(rate);
-            table.AddCell(amount);
-
-            PdfPTable table2 = new PdfPTable(5);
-
-            PdfPCell id = new PdfPCell();
-            cellname.HorizontalAlignment = Element.ALIGN_CENTER;
-            cellname.BackgroundColor = BaseColor.WHITE;
-            cellname.BorderWidth = 1;
-            cellname.BorderColor = BaseColor.BLACK;
-            cellname.Padding = 3;
+            table.AddCell(amt);
 
 
+            foreach (var Item in entity.Items)
+            {
+
+                //PdfPTable table2 = new PdfPTable(5);
+                //table2.SpacingAfter = 5;
+                //table2.SpacingBefore = 5;
+                //table2.TotalWidth = PageSize.A4.Width;
+                //table2.LockedWidth = true;
+
+                PdfPCell id = new PdfPCell(new Phrase(Item.ItemId));
+                id.HorizontalAlignment = Element.ALIGN_CENTER;
+                id.BackgroundColor = BaseColor.WHITE;
+               // id.BorderWidth = 1;
+                id.BorderColor = BaseColor.LIGHT_GRAY;
+                id.Padding = 3;
+                table.AddCell(id);
+
+                PdfPCell desc = new PdfPCell(new Phrase(Item.Description));
+                desc.HorizontalAlignment = Element.ALIGN_CENTER;
+                desc.BackgroundColor = BaseColor.WHITE;
+               // desc.BorderWidth = 1;
+                desc.BorderColor = BaseColor.LIGHT_GRAY;
+                desc.Padding = 3;
+                table.AddCell(desc);
+
+
+                PdfPCell quantity = new PdfPCell(new Phrase(Item.Quantity.ToString()));
+                quantity.HorizontalAlignment = Element.ALIGN_CENTER;
+                quantity.BackgroundColor = BaseColor.WHITE;
+              //  quantity.BorderWidth = 1;
+                quantity.BorderColor = BaseColor.LIGHT_GRAY;
+                quantity.Padding = 3;
+                table.AddCell(quantity);
+
+                PdfPCell itemRate = new PdfPCell(new Phrase(Item.Rate.ToString()));
+                itemRate.HorizontalAlignment = Element.ALIGN_CENTER;
+                itemRate.BackgroundColor = BaseColor.WHITE;
+             //   itemRate.BorderWidth = 1;
+                itemRate.BorderColor = BaseColor.LIGHT_GRAY;
+                itemRate.Padding = 3;
+                table.AddCell(itemRate);
+
+                PdfPCell amount = new PdfPCell(new Phrase(Item.Amount.ToString()));
+                amount.HorizontalAlignment = Element.ALIGN_CENTER;
+                amount.BackgroundColor = BaseColor.WHITE;
+             //   amount.BorderWidth = 1;
+                amount.BorderColor = BaseColor.LIGHT_GRAY;
+                amount.Padding = 3;
+                table.AddCell(amount);
+
+            }
 
             document.Add(table);
 
 
+            Paragraph paragraph8 = new Paragraph("SubTotal :"+ entity.SubTotal);
+            paragraph8.Alignment = Element.ALIGN_RIGHT;
+            document.Add(paragraph8);
 
+            Paragraph paragraph9 = new Paragraph("Shipping Charge :" + entity.ShippingCharges);
+            paragraph9.Alignment = Element.ALIGN_RIGHT;
+            document.Add(paragraph9);
+
+            Paragraph paragraph10 = new Paragraph("Adjustment :" + entity.Adjustments);
+            paragraph10.Alignment = Element.ALIGN_RIGHT;
+            document.Add(paragraph10);
+
+            Paragraph paragraph11 = new Paragraph("Total :" + entity.Total);
+            paragraph11.Alignment = Element.ALIGN_RIGHT;
+            document.Add(paragraph11);
+
+            Paragraph paragraph12 = new Paragraph("BalanceDue :" + entity.BalanceDue);
+            paragraph12.Alignment = Element.ALIGN_RIGHT;
+            document.Add(paragraph12);
 
             document.Close();
             System.Diagnostics.Process.Start("Invioce.pdf");
