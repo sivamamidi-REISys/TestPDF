@@ -191,7 +191,6 @@ namespace PDFUtilities_Legacy
             document.Add(paragraph14);
             document.Close();
 
-            System.Diagnostics.Process.Start("Invioce.pdf");
         }
 
     }
