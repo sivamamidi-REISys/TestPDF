@@ -75,9 +75,9 @@ namespace PDFUtilities_Legacy
             sb.Append("</table>");
             GetPDF(sb.ToString());
         }
-        public void GetPDF(string pHTML)
+        public byte[] GetPDF(string pHTML)
         {
-            //byte[] bPDF = null;
+            byte[] bPDF = null;
             FileStream fs = new FileStream("Invioce.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
             // MemoryStream ms = new MemoryStream();
             TextReader txtReader = new StringReader(pHTML);
@@ -104,9 +104,9 @@ namespace PDFUtilities_Legacy
             htmlWorker.Close();
             doc.Close();
 
-            //bPDF = fs.ToArray();
+            bPDF = System.IO.File.ReadAllBytes("Invioce.pdf");
 
-            // return bPDF;
+            return bPDF;
         }
 
         public static void GenerateInvoice(InvoiceEntity entity)
